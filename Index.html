@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<!-- Created By PT Geo Dipa Persero -->
+<html lang="en" dir="ltr" id="html">
+
+<head>
+  <meta charset="utf-8">
+  <title>BON Cetak BBM Kendaraan | by Geo Dipa Persero Unit Patuha </title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html,
+    body {
+      display: grid;
+      height: 100%;
+      width: 100%;
+      place-items: center;
+      background: #f2f2f2;
+    }
+
+    ::selection {
+      background: #4158d0;
+      color: #fff;
+    }
+
+    .wrapper {
+      width: 380px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .wrapper .title {
+      font-size: 35px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 100px;
+      color: #fff;
+      user-select: none;
+      border-radius: 15px 15px 0 0;
+      background: linear-gradient(-135deg, #c850c0, #4158d0);
+    }
+
+    .wrapper form {
+      padding: 10px 30px 50px 30px;
+    }
+
+    .wrapper form .field {
+      height: 50px;
+      width: 100%;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .wrapper form .field input,
+    .wrapper form .field select {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      font-size: 17px;
+      padding-left: 20px;
+      border: 1px solid lightgrey;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .wrapper form .field input:focus,
+    form .field input:valid,
+    .wrapper form .field select:focus,
+    form .field select:valid {
+      border-color: #4158d0;
+    }
+
+    .wrapper form .field label {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      color: #999999;
+      font-weight: 400;
+      font-size: 17px;
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+    }
+
+    form .field input:focus~label,
+    form .field input:valid~label,
+    form .field select:focus~label,
+    form .field select:valid~label {
+      top: 0%;
+      font-size: 16px;
+      color: #4158d0;
+      background: #fff;
+      transform: translateY(-50%);
+    }
+    
+    .button-rounded{
+      height: 100%;
+      width: 100%;
+      outline: none;
+      font-size: 17px;
+      padding-left: 20px;
+      border: 1px solid lightgrey;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    form .content {
+      display: flex;
+      width: 100%;
+      height: 50px;
+      font-size: 16px;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    form .content .checkbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    form .content input {
+      width: 15px;
+      height: 15px;
+      background: red;
+    }
+
+    form .content label {
+      color: #262626;
+      user-select: none;
+      padding-left: 5px;
+    }
+
+    form .content .pass-link {
+      color: "";
+    }
+
+    form .field input[type="button"] {
+      color: #fff;
+      border: none;
+      padding-left: 0;
+      margin-top: -10px;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      background: linear-gradient(-135deg, #c850c0, #4158d0);
+      transition: all 0.3s ease;
+    }
+
+    form .field input[type="button"]:active {
+      transform: scale(0.95);
+    }
+
+    form .signup-link {
+      color: #262626;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    form .pass-link a,
+    form .signup-link a {
+      color: #4158d0;
+      text-decoration: none;
+    }
+
+    form .pass-link a:hover,
+    form .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* CSS untuk popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .popup-content {
+      background-color: #fff;
+      width: 50%;
+      margin: 20% auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .close {
+      color: #000;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Aturan CSS khusus untuk cetakan */
+    @media print {
+      body {
+        font-size: 5pt;
+        margin: 0;
+      }
+
+      .invoice {
+        padding: 1px;
+        page-break-after: always;
+      }
+    }
+
+    /* .fab-container2 */
+    .fab-container2 {
+      position: fixed;
+      bottom: 80px;
+      right: 1px;
+      z-index: 999;
+      cursor: pointer;
+    }
+
+    .fab-label2 {
+      padding: 2px 5px;
+      align-self: center;
+      user-select: none;
+      white-space: nowrap;
+      border-radius: 3px;
+      font-size: 16px;
+      background: #666666;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* .fab-container */
+    .fab-container {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 999;
+      cursor: pointer;
+    }
+
+    .fab-icon-holder {
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      background: #6dd4fc;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .fab-icon-holder:hover {
+      opacity: 0.8;
+    }
+
+    .fab-icon-holder i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fab {
+      height: 100%;
+      font-size: 25px;
+      color: #000000;
+      width: 56px;
+      height: 56px;
+      background: #6dd4fc;
+    }
+
+    .fab-options {
+      list-style-type: none;
+      margin: 0;
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      opacity: 0;
+      transition: all 0.3s ease;
+      transform: scale(0);
+      transform-origin: 85% bottom;
+    }
+
+    .fab:hover+.fab-options,
+    .fab-options:hover {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .fab-options li {
+      display: flex;
+      justify-content: flex-end;
+      padding: 5px;
+    }
+
+    .fab-label {
+      padding: 2px 5px;
+      align-self: center;
+      user-select: none;
+      white-space: nowrap;
+      border-radius: 3px;
+      font-size: 16px;
+      background: #666666;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      margin-right: 10px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* .input-file{
+      visibility: hidden;
+    cursor: pointer;
+    position: relative;
+    } */
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav>
+    <div class="nav nav-tabs wrapper row" id="nav-tab" role="tablist">
+      <button class="nav-link col-6 rounded-4 active" id="struk-tab" data-bs-toggle="tab" data-bs-target="#struk"
+        type="button" role="tab" aria-controls="struk" aria-selected="true">Buat Struk</button>
+      <button class="nav-link col-6 rounded-4" id="bukti-tab" data-bs-toggle="tab" data-bs-target="#bukti" type="button"
+        role="tab" aria-controls="bukti" aria-selected="false">Upload Bukti</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="struk" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+      <div class="wrapper">
+        <div class="title"> Cetak BON BBM </div>
+        <form onsubmit="submitForm(event)">
+          <div class="field">
+            <input type="text" id="noPol" required>
+            <label>No Pol</label>
+          </div>
+          <div class="field">
+            <input type="text" id="typeKendaraan" required>
+            <label>Tipe Kendaraan</label>
+          </div>
+          <div class="field">
+            <select id="jenis" required>
+              <option value="" disabled selected></option>
+              <option value="pertamax">Pertamax</option>
+              <option value="pertamina-DEX">Pertamina DEX</option>
+            </select>
+            <label>Jenis</label>
+          </div>
+          <!-- <div class="field">
+            <input type="text" id="banyaknya" >
+            <label>Banyaknya</label>
+          </div> -->
+          <div class="field">
+            <input type="text" class="number-only" id="harga" required>
+            <label>Harga</label>
+          </div>
+          <!-- <div class="field">
+            <input type="file" id="file">
+            <label>Upload foto struk</label>
+          </div> -->
+          <div class="field">
+            <input id="submit" type="submit" value="Kirim">
+          </div>
+          <div class="field d-none">
+            <button type="button" id="cetak-bon-lain" class="button-rounded reload" onclick="refreshPage(this)">Cetak Bon Lain</button>
+          </div>
+        </form>
+        <div id="output"></div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="bukti" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+      <div class="wrapper">
+        <div class="title"> Upload Bukti </div>
+        <form onsubmit="submitBukti(event)">
+          <div class="field">
+            <input type="text" id="bill_id" required>
+            <label>Nomer Bon</label>
+          </div>
+          <div class="field">
+            <input type="text" id="km" required>
+            <label>KM</label>
+          </div>
+          <div class="field">
+            <input type="file" class="input-file py-3" style="height: 120%;font-size: 14px;" id="file">
+            <label for="file">Upload foto struk</label>
+          </div>
+          <div class="field">
+            <input id="submitBuktiButton" type="submit" value="Kirim">
+          </div>
+          <div class="field d-none">
+            <button type="button" id="upload-bukti-lain" class="button-rounded reload" onclick="refreshPage(this)">Upload Bukti Lain</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+  </script>
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      document.getElementById('submit').disabled = true;
+      var noPol = document.getElementById('noPol').value;
+      var typeKendaraan = document.getElementById('typeKendaraan').value;
+      var jenis = document.getElementById('jenis').value;
+      // var banyaknya = document.getElementById('banyaknya').value;
+      var harga = document.getElementById('harga').value;
+      google.script.run.withSuccessHandler(function (invoice) {
+        displayInvoice(invoice);
+        closePopup();
+        $("#cetak-bon-lain").parent().removeClass('d-none');
+      }).processForm({
+        noPol: noPol,
+        typeKendaraan: typeKendaraan,
+        jenis: jenis,
+        harga: harga
+      });
+    }
+
+    
+
+    function openPopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'block';
+      noPol.value = "";
+      typeKendaraan.value = "";
+      jenis.value = "";
+      harga.value = "";
+      km.value = "";
+    }
+
+    function closePopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'none';
+    }
+
+    setTimeout(function () {
+      document.getElementById('success-message').style.display = 'none';
+    }, 5000);
+
+    function displayInvoice(invoice) {
+      var outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = '<div class="invoice">' + invoice + '</div>';
+      closePopup();
+
+      outputDiv.innerHTML += '<button type="button" onclick="printInvoice()" class="field">Cetak BBM</button>';
+    }
+
+    function printInvoice() {
+      var printWindow = window.open('', '', 'width=600,height=600');
+      var invoiceContent = document.querySelector('.invoice').innerHTML;
+
+      printWindow.document.open();
+      printWindow.document.write(
+        '<html moznomarginboxes mozdisallowselectionprint><head></head><body>'
+      ); // Add moznomarginboxes for Firefox
+
+      printWindow.document.write('<style type="text/css">');
+      printWindow.document.write('@page { size: 58mm 120mm; margin: 0; }'); // Set @page margin to 0
+      printWindow.document.write('@media print {');
+      printWindow.document.write(
+        '  header, footer, *[role="banner"], *[role="contentinfo"] { display: none; }'
+      ); // Hide header and footer elements
+      printWindow.document.write('  body { margin: 20px; }');
+      printWindow.document.write('}');
+      printWindow.document.write('</style>');
+      printWindow.document.write(
+        '<img src="https://www.geodipa.co.id/wp-content/uploads/2023/11/logo.svg" style="width: 25px;" /> <br>');
+
+      printWindow.document.write(invoiceContent);
+      printWindow.document.write('</body></html>');
+
+      printWindow.document.close();
+      printWindow.print();
+    }
+  </script>
+  <script>
+    $(".number-only").keyup(function(e) {
+        var regex = /^[0-9 X]+$/;
+        if (regex.test(this.value) !== true) {
+          this.value = this.value.replace(/[^0-9 X]+/, "");
+        }
+      });
+    function refreshPage(){
+      google.script.run
+      .withSuccessHandler(function(url){
+        window.open(url,'_top');
+      })
+      .getScriptURL();
+    }
+    function submitBukti(event) {
+      event.preventDefault();
+      document.getElementById('submitBuktiButton').disabled = true;
+      var bill_id = document.getElementById('bill_id').value;
+      var km = document.getElementById('km').value;
+      var fileInput = document.getElementById('file');
+      var file = null;
+      if (fileInput.files.length > 0) {
+        file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const content = e.target.result;
+          const filename = file.name;
+          const data = {
+            bill_id: bill_id,
+            km: km
+          }
+          const data_file = {
+            content: content,
+            filename: filename
+          };
+          google.script.run.withSuccessHandler(function (response) {
+            if(response.status){
+              $("#upload-bukti-lain").parent().removeClass('d-none');
+              alert(response.msg);
+            }else{
+              alert(response.msg);
+              document.getElementById('submitBuktiButton').disabled = false;
+            }
+          }).processBukti(data, data_file);
+        };
+        reader.readAsDataURL(file);
+      } 
+      else {
+        alert('file belum terpilih')
+      }
+    }
+    function reloadUrl(url){
+        window.open(url,'_top');
+    }
+  </script>
+  <!-- Div untuk popup -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <p id="success-message">Cetak Berhasil Dibuat!</p>
+    </div>
+  </div>
+  <div class="fab-container">
+
+  </div>
+  <div class="fab-container2">
+
+
+  </div>
+  </a>
+  </div>
+  <script src="//kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
